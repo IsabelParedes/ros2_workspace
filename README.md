@@ -1,10 +1,20 @@
 # BUILD
 
-From root dir
+From root dir install dependencies with rosdep
 ```sh
 rosdep install -i --from-path src --rosdistro humble -y
 
 colcon build 
+```
+
+**Emscripten**
+```sh
+./build_wasm.sh --packages-up-to test_pubsub
+```
+
+**Linux**
+```sh
+./build_linux.sh --packages-select rmw_wasm_cpp
 ```
 
 ### Setup
