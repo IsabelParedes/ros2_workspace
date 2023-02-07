@@ -1,11 +1,34 @@
 #! /bin/bash
 
+DrawLogo()
+{
+    echo -e "\n\
+╔═════════════════════╗ \n\
+║   ╔╗ ╦  ╔═╗╔═╗╔╦╗   ║ \n\
+║   ╠╩╗║  ╠═╣╚═╗║║║   ║ \n\
+║   ╚═╝╩═╝╩ ╩╚═╝╩ ╩   ║ \n\
+╚═════════════════════╝ \n"
+
+    # echo -e " \n\
+    # @@@@@@@   @@@        @@@@@@    @@@@@@   @@@@@@@@@@   \n\
+    # @@@@@@@@  @@@       @@@@@@@@  @@@@@@@   @@@@@@@@@@@  \n\
+    # @@!  @@@  @@!       @@!  @@@  !@@       @@! @@! @@!  \n\
+    # !@   @!@  !@!       !@!  @!@  !@!       !@! !@! !@!  \n\
+    # @!@!@!@   @!!       @!@!@!@!  !!@@!!    @!! !!@ @!@  \n\
+    # !!!@!!!!  !!!       !!!@!!!!   !!@!!!   !@!   ! !@!  \n\
+    # !!:  !!!  !!:       !!:  !!!       !:!  !!:     !!:  \n\
+    # :!:  !:!  :!:       :!:  !:!       !:!  :!:     :!:  \n\
+    # ::  ::::  :: ::::   ::   :::   :::: ::  :::     ::   \n\
+    # :: : ::   : :: : :   :   : :  :: : :    :       :    \n"
+}
+
 #-------------------------------------------------------------------------------
 # HELP
 #-------------------------------------------------------------------------------
 Help()
 {
-    echo "options:"
+    DrawLogo
+    echo -e "Options:"
     echo "-h     help"
     echo "-c     clean workspace"
     echo "-d     activate cmake debug mode"
@@ -14,6 +37,7 @@ Help()
     echo "-i     ignore \"listed packages\""
     echo "-p     install emscripten python"
     echo "-v     verbose"
+    echo -e "\n"
 }
 
 #-------------------------------------------------------------------------------
@@ -74,10 +98,12 @@ while getopts "hcvpu:s:i:" option; do
             InstallPython;;
 
         u) # Build up to package
+            DrawLogo
             package_args="--packages-up-to ${OPTARG}"
             echo "[BLASM]: Build up to ${OPTARG}.";;
 
         s) # Build selected package
+            DrawLogo
             [[ -d "${PWD}/build/${OPTARG}" ]] && rm -rf "${PWD}/build/${OPTARG}"
             package_args="--packages-select ${OPTARG}"
             echo "[BLASM]: Build only ${OPTARG}.";;
@@ -88,6 +114,7 @@ while getopts "hcvpu:s:i:" option; do
 
         \?) # Invalid option
             echo "Error: Invalid option."
+            Help
             exit;;
     esac
 done
@@ -95,7 +122,7 @@ done
 #-------------------------------------------------------------------------------
 # MAIN
 #-------------------------------------------------------------------------------
-[[ -z "${package_args}" ]] && { echo "No package given."; exit 1; }
+[[ -z "${package_args}" ]] && { echo "No args given."; exit 1; }
 [[ -d "${PWD}/src" ]] || { echo "Not a workspace directory"; exit 1; }
 
 echo "[BLASM]: Commencing build."
