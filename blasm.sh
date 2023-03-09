@@ -9,17 +9,6 @@ DrawLogo()
 ║   ╚═╝╩═╝╩ ╩╚═╝╩ ╩   ║ \n\
 ╚═════════════════════╝ \n"
 
-    # echo -e " \n\
-    # @@@@@@@   @@@        @@@@@@    @@@@@@   @@@@@@@@@@   \n\
-    # @@@@@@@@  @@@       @@@@@@@@  @@@@@@@   @@@@@@@@@@@  \n\
-    # @@!  @@@  @@!       @@!  @@@  !@@       @@! @@! @@!  \n\
-    # !@   @!@  !@!       !@!  @!@  !@!       !@! !@! !@!  \n\
-    # @!@!@!@   @!!       @!@!@!@!  !!@@!!    @!! !!@ @!@  \n\
-    # !!!@!!!!  !!!       !!!@!!!!   !!@!!!   !@!   ! !@!  \n\
-    # !!:  !!!  !!:       !!:  !!!       !:!  !!:     !!:  \n\
-    # :!:  !:!  :!:       :!:  !:!       !:!  :!:     :!:  \n\
-    # ::  ::::  :: ::::   ::   :::   :::: ::  :::     ::   \n\
-    # :: : ::   : :: : :   :   : :  :: : :    :       :    \n"
 }
 
 #-------------------------------------------------------------------------------
@@ -134,7 +123,7 @@ colcon build \
     --cmake-args \
         -DCMAKE_TOOLCHAIN_FILE="${EMSDK_DIR}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake" \
         -DBUILD_TESTING=OFF \
-        -DBUILD_SHARED_LIBS=OFF \
+        -DBUILD_SHARED_LIBS=ON \
         -DCMAKE_VERBOSE_MAKEFILE=${debug_mode} \
         -DRMW_IMPLEMENTATION=${RMW_IMPLEMENTATION} \
         -DCMAKE_FIND_ROOT_PATH_MODE_PACKAGE=ON \
@@ -142,3 +131,4 @@ colcon build \
         -DCMAKE_FIND_DEBUG_MODE=${debug_mode} \
         -DFORCE_BUILD_VENDOR_PKG=ON \
         -DPYBIND11_PYTHONLIBS_OVERWRITE=OFF 
+        
