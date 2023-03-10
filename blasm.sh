@@ -59,7 +59,7 @@ export RMW_IMPLEMENTATION="rmw_wasm_cpp"
 # OPTIONS
 #-------------------------------------------------------------------------------
 
-while getopts "hcvpu:s:i:" option; do
+while getopts "hcdvpu:s:i:" option; do
     case $option in
         h) # Display help
             Help
@@ -130,5 +130,5 @@ colcon build \
         -DCMAKE_CROSSCOMPILING=TRUE \
         -DCMAKE_FIND_DEBUG_MODE=${debug_mode} \
         -DFORCE_BUILD_VENDOR_PKG=ON \
-        -DPYBIND11_PYTHONLIBS_OVERWRITE=OFF 
-        
+        -DPYBIND11_PYTHONLIBS_OVERWRITE=OFF \
+        -DPython3_EXECUTABLE=${CONDA_PREFIX}/bin/python 
